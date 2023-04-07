@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Get My Location</title>
+  </head>
+  <body>
+    <h1>Get My Location</h1>
+    <p>Click the button to get your current location:</p>
+    <button onclick="getLocation()">Get Location</button>
+    <p id="location"></p>
+    <p id="status"></p>
+
+    <script>
+
+        
+
+    let givenLocationAl = 23.7700754; 
+    let givenLocationLo = 90.3533886;
+
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+          document.getElementById("location").innerHTML = "Geolocation is not supported by this browser.";
+        }
+      }
+
+      function showPosition(position) {
+        document.getElementById("location").innerHTML = "Latitude and Longitude: " + position.coords.latitude + ", " + position.coords.longitude;
+
+        let value = Math.sqrt(Math.pow(givenLocationAl - position.coords.latitude, 2) + Math.pow(givenLocationLo - position.coords.longitude, 2));
+
+        console.log(value);
+
+        if (value <= 0.005){
+            document.getElementById("status").innerHTML = "You are In";
+        }else{
+            document.getElementById("status").innerHTML = "You are Out";
+        }
+      }
+    </script>
+  </body>
+</html>
